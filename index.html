@@ -40,7 +40,7 @@
 
 				return new MyMatrix(a,b,c,d,e,f);
 			}
-			
+
 			function DOMMatrixTest(n){
 				let a = new DOMMatrix([1,2,3,4,5,6]);
 				let b = new DOMMatrix([1,2,3,4,5,6]);
@@ -80,7 +80,6 @@
 				document.querySelector('#MyMatrix-10000').innerHTML = myMatrixTest(10000);
 				document.querySelector('#MyMatrix-100000').innerHTML = myMatrixTest(100000);
 			}
-			document.querySelector('#runTest').addEventListener('click', runTest);
 		</script>
 	</head>
 	<body>
@@ -119,5 +118,8 @@
 				<th id="MyMatrix-100000"></th>
 			</tr>
 		</table>
+		<script>
+			document.querySelector('#runTest').addEventListener('click', runTest);
+		</script>
 	</body>
 </html>

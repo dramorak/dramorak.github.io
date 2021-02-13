@@ -13,7 +13,7 @@ function MyMatrix(seq){
 	this._matrix = seq;
 }
 
-MyMatrix.prototype.multiply(mat){
+MyMatrix.prototype.multiply= function(mat){
 	if((mat instanceof myMatrix) === false){
 		throw new TypeError('Expected a MyMatrix entry');
 	}

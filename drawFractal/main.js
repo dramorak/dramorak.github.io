@@ -153,6 +153,8 @@ function initializeMenu(){
 				// change meta color information.
 				if(meta.colorStyle === 'backgroundColor'){
 					meta.backgroundColor = colorMap[color];
+					// change main background color.
+					document.querySelector('main').style.backgroundColor = color;
 				}else if(meta.colorStyle ==='drawColor'){
 					meta.drawColor = colorMap[color]; 
 				}
@@ -171,6 +173,7 @@ function initializeMenu(){
 		let color = e.target.value;
 		if(meta.colorStyle === 'backgroundColor'){
 			meta.backgroundColor = new Color(color.slice(1,3), color.slice(3,5), color.slice(5,7), hex=true);
+			document.querySelector('main').style.backgroundColor = color;
 		} else if(meta.colorStyle === 'drawColor'){
 			meta.drawColor = new Color(color.slice(1,3), color.slice(3,5), color.slice(5,7), hex=true);
 		}

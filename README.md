@@ -1,2 +1,4 @@
 # dramorak.github.io
-Performance benchmark for different matrix types.
+A website created for personal marketing, utilities, and temporary deployment of under-construction websites. 
+
+

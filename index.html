@@ -1,12 +1,68 @@
 <!DOCTYPE html>
 <html lang='en'>
 	<head>
-		<title>Dramorak's website.</title>
+		<title>Dramorak's website</title>
+		<style>
+		    * {
+		    	font-family: arial, helvetica;
+		    }
+            html {
+            	background-color: rgb(255,255,255);
+            }
+		    body {
+		    	width: 80%;
+		    	margin: 0 auto;
+		    	background-color: rgb(227,227,227);
+		    }
 
+		    header {
+		    	padding: 5px;
+		    	margin: 5px;
+		    }
+		    h1 {
+		    	text-align: center;
+		    }
+            #reachMe{ 
+                width: 120px;
+                margin: 0 auto;
+            }
+		    a {
+		    	text-decoration: none;
+		    }
+		    .icon {
+		    	width: 32px;
+		    	height:32px;
+		    	margin-right: 5px
+		    }
+
+		    main {
+		    	padding: 5px;
+		    	margin: 5px;
+		    	border: 1px solid rgb(150,150,150);
+		    }
+
+		    ul {
+                list-style-type:none;
+		    }
+
+		</style>
 	</head>
 	<body>
-		<h1>Dramorak's website.</h1>
-		<p><a href="/drawFractal/front page.html">drawFractal, the under-development fractal creation project.</a></p>
-		<p><a href="/test">Tests.</a></p>
+	    <header>
+	    <h1>Dramorak's Hub</h1>	    
+			<div id="reachMe">
+				<a href='https://linkedin.com/in/alexander-inglis'><img src="images/linkedin.png" alt='linkedin' class='icon'></a>
+				<a href='mailto://dramorak@gmail.com'><img src="images/Gmail-logo.png" alt='email' class='icon'></a>
+				<a href='https://github.com/dramorak'><img src="images/github.png" alt='github' class='icon'></a>
+			</div>
+			<p><a href="https://dramorak.github.io/drawFractal/front page.html">Check out my latest project!</a></p>
+	    </header>
+	    <main>
+			<p><strong>Testing Grounds:</strong></p>
+			<ul>
+				<li><a href="tests/matrix tests.html">Matrix Implementations</a></li>
+				<li><a href="tests/canvas tests.html">Canvas</a></li>
+			</ul>
+	    </main>
 	</body>
 </html>

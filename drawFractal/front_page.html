@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" >
+		<title>Create your own fractals</title>
+		<meta name="description" content="Drawfractal provides a simple, user friendly interface for creating beautiful fractal patterns.">
+		<link rel="stylesheet" href="front_page.css">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<script  src="init.js"></script>
+		<script src="testing.js"></script>
+		<script  async src="main.js"></script>
+	</head>
+	<body>
+		<!-- Main Body -->
+		<main>
+			<div id="menu">
+				<div id="fractals" class="menuSection">
+					<p class="sectionTitle">Branches</p>
+					<div class=sectionContent>
+						<div id="branch" class="branchContainer">
+							<img src="images/branch.png" alt="branch" class="menuImage">
+						</div>
+						<div class="after"></div>
+					</div>
+				</div>
+				<div id="tools" class="menuSection">
+					<p class="sectionTitle">Tools</p>
+					<div class="sectionContent">
+						<div id='grab' class="menuItem toolItem">
+							<img src="images/handGrab.png" alt='grab' class='menuImage'>
+							<div class="informationBox">Grab screen</div>
+						</div>
+						<div id="center" class="menuItem toolItem">
+							<img src="images/center.png" alt="redo" class="menuImage">
+							<div class="informationBox">Center screen</div>
+						</div>
+						<div id='undo' class="menuItem toolItem">
+							<img src="images/undo.png" alt="undo" class="menuImage">
+							<div class="informationBox">Undo</div>
+						</div>
+						<div id='redo' class="menuItem toolItem">
+							<img src="images/redo.png" alt="redo" class="menuImage">
+							<div class="informationBox">Redo</div>
+						</div>
+						<div class="after"></div>
+					</div>
+				</div>
+				<div id="thickness" class="menuSection">
+					<p class='sectionTitle'>Size</p>
+					<div class = "sectionContent">
+						<div id="thicknessDisplay" class="thicknessContainer">
+							<img src="images/sizes.png" alt="Line Size" class="menuImage">
+						</div>
+					</div>
+				</div>
+				<div id="shapes" class="menuSection">
+					<p class="sectionTitle">Shapes</p>
+					<div class="sectionContent">
+						<div id="line" class="menuItem">
+							<img src="images/line.png" alt="line" class="menuImage">
+						</div>
+						<div id="circle" class="menuItem">
+							<img src="images/circle.png" alt="line" class="menuImage">
+						</div>
+						<div id="triangle" class="menuItem">
+							<img src="images/triangle.png" alt="line" class="menuImage">
+						</div>
+						<div id="rectangle" class="menuItem">
+							<img src="images/rectangle.png" alt="line" class="menuImage">
+						</div>
+						<div id="hexagon" class="menuItem">
+							<img src="images/hexagon.png" alt="line" class="menuImage">
+						</div>
+						<div id="octagon" class="menuItem">
+							<img src="images/octagon.png" alt="line" class="menuImage">
+						</div>
+						<div id="fourstar" class="menuItem">
+							<img src="images/fourstar.png" alt="line" class="menuImage">
+						</div>
+						<div id="fivestar" class="menuItem">
+							<img src="images/fivestar.png" alt="line" class="menuImage">
+						</div>
+						<div class="after"></div>
+					</div>
+					<div id="fillStyle" class='sectionContentFooter'>
+						<div id="stroke" class="menuItem">
+							<img src="images/outline.png" alt="outline" class="menuImage">
+						</div>
+						<div id="fill" class="menuItem">
+							<img src="images/fill.png" alt="fill" class="menuImage">
+						</div>
+						<div class="after"></div>
+					</div>
+				</div>
+				<div id='colors' class='menuSection'>
+					<p class='sectionTitle'>Colors</p>
+					<div id='drawColorContainer' class='colorStyle selected'>
+						<div id='drawColor' class='colorBox'><div class="colorBoxInterior" style='background-color: black'></div></div>
+						<div class="label"> foreground color </div>
+						<div class='after'></div>
+					</div>
+					<div id='backgroundColorContainer' class='colorStyle'>
+						<div id='backgroundColor' class='colorBox'><div class="colorBoxInterior" style='background-color: white'></div></div>
+						<div class="label"> background color</div>
+						<div class='after'></div>
+					</div>
+					<div id='black' class='colorBox'><div class="colorBoxInterior" style='background-color: black'></div></div>
+					<div id='grey' class='colorBox'><div class="colorBoxInterior" style='background-color: grey'></div></div>
+					<div id='darkred' class='colorBox'><div class="colorBoxInterior" style='background-color: darkred'></div></div>
+					<div id='red' class='colorBox'><div class="colorBoxInterior" style='background-color: red'></div></div>
+					<div id='orange' class='colorBox'><div class="colorBoxInterior" style='background-color: orange'></div></div>
+					<div id='yellow' class='colorBox'><div class="colorBoxInterior" style='background-color: yellow'></div></div>
+					<div id='lawngreen' class='colorBox'><div class="colorBoxInterior" style='background-color: lawngreen'></div></div>
+					<div id='green' class='colorBox'><div class="colorBoxInterior" style='background-color: green'></div></div>
+					<div id='cadetblue' class='colorBox'><div class="colorBoxInterior" style='background-color: cadetblue'></div></div>
+					<div id='blue' class='colorBox'><div class="colorBoxInterior" style='background-color: blue'></div></div>
+					<div id='violet' class='colorBox'><div class="colorBoxInterior" style='background-color: violet'></div></div>
+					<div id='purple' class='colorBox'><div class="colorBoxInterior" style='background-color: purple'></div></div>
+					<div id='cyan' class='colorBox'><div class="colorBoxInterior" style='background-color: cyan'></div></div>
+					<div id='lightsalmon' class='colorBox'><div class="colorBoxInterior" style='background-color: lightsalmon'></div></div>
+					<div id='lightyellow' class='colorBox'><div class="colorBoxInterior" style='background-color: lightyellow'></div></div>
+					<div id='lime' class='colorBox'><div class="colorBoxInterior" style='background-color: lime'></div></div>
+					<div id='mistyrose' class='colorBox'><div class="colorBoxInterior" style='background-color: mistyrose'></div></div>
+					<div id='slateblue' class='colorBox'><div class="colorBoxInterior" style='background-color: slateblue'></div></div>
+					<div id='tomato' class='colorBox'><div class="colorBoxInterior" style='background-color: tomato'></div></div>
+					<div id='white' class='colorBox'><div class="colorBoxInterior" style='background-color: white'></div></div>
+					<div class='after'></div>
+					<label for="customColor">Custom color:</label>
+					<input id="customColor" class='rgb' type="color">
+				</div>
+				<div id="file" class="menuSection">
+					<p class="sectionTitle">File</p>
+					<div class="sectionContent">
+						<div id="save" class="menuItem">
+							<img src="images/save.png" alt='save' class='menuImage'>
+							<div class="informationBox">Save</div>
+						</div>
+						<div id="new" class="menuItem">
+							<img src="images/new.png" alt='new' class='menuImage'>
+							<div class="informationBox">New</div>
+						</div>
+						<div class='after'></div>
+					</div>
+				</div>
+				<!--
+				<div id="share" class="menuSection">
+					<p class="sectionTitle">Share your creation!</p>
+					<div class="sectionContent">
+						<div id="instagram" class="menuItem">
+
+						</div>
+						<div id="facebook" class="menuItem">
+
+						</div>
+						<div id="twitter" class="menuItem">
+
+						</div>
+						<div class="after"></div>
+					</div>
+				</div>
+				-->
+			</div>
+			<canvas>
+				<!-- content when browser does not support canvas  -->
+				<img id="centerpiece" alt="Everywhere you look, infinity." src="images/graphic.webp">
+			</canvas>
+			<div id="thicknessInputMenu" class="thicknessInputMenuContainer">
+				<div id="one" class="thicknessOption"><img src="images/one.png" alt="one" class="menuImage"></div>
+				<div id="two" class="thicknessOption"><img src="images/two.png" alt="two" class="menuImage"></div>
+				<div id="three" class="thicknessOption"><img src="images/three.png" alt="three" class="menuImage"></div>
+				<div id="four" class="thicknessOption"><img src="images/four.png" alt="four" class="menuImage"></div>
+			</div>
+		</main>
+
+		<footer>
+			<div id='blog' class='hyperlinks'><a href="interesting stuff/interesting stuff.html">blog</a></div>
+			<div id='' class='hyperlinks'><a href="">tutoring</div>
+			<!--<div id='patreon' class='hyperlinks'>If you like the website, and would like to buy me a coffee:</div>-->
+			<div class='personal'>
+				<a href="https://github.com/dramorak" ><img class='pictures' src='images/GitHub-Mark/PNG/github.png' alt='linkedin'></a>
+			</div>
+			<div class='personal'>
+				<a href="mailto:alexdinglis@gmail.com" ><img class='pictures' src='images/Gmail-logo.png' alt='gmail'></a>
+			</div>
+			<div class='personal'>
+				<a href="https://www.linkedin.com/in/alexander-inglis/" ><img class='pictures' src='images/linkedin.png' alt='linkedin'></a>
+			</div>
+		</footer>
+	</body>
+</html> 

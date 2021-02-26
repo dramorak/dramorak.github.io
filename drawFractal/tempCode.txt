@@ -1,0 +1,38 @@
+// Line event listeners.
+function endLine(start){
+	function exitHandler(e){
+		if (e.clientY < 36){
+			return;
+		}
+		var end = windowToCanvas(e);
+		var newLine = new Line(start, end);
+		fractal.trunk.push(newLine);
+
+		canvas.removeEventListener('click', exitHandler);
+		canvas.addEventListener('click', startLine);
+	}
+	return exitHandler;
+}
+function startLine(e){
+	if (e.clientY < 36){
+		return;
+	}
+	var newCoords = windowToCanvas(e);
+
+	canvas.removeEventListener('click', startLine);
+	canvas.addEventListener('click', endLine(newCoords));
+}
+canvas.addEventListener('click', startLine);
+
+// Branch Even listener
+
+
+// Circle Even Listener
+/*
+function drawCircle(e){
+	var center = windowToCanvas(e);
+	var newCircle = new Circle(center, 10);
+	fractal.trunk.push(newCircle);
+}
+canvas.addEventListener('mousedown', drawCircle);
+*/

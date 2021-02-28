@@ -89,6 +89,10 @@ function initializeMenu(){
 					var blobURL = URL.createObjectURL(blob);
 					window.open(blobURL);
 				}
+				clear();
+				ctx.fillStyle = meta.backgroundColor.toString();
+				ctx.fillRect(inv*(-canvasCenter.x), inv*(canvasCenter.y - height), inv*width, inv*height);
+				fractal.draw();
 				canvas.toBlob(saveContext, type='image/png');
 				return;
 			} else if(target.id === 'new'){
@@ -337,8 +341,6 @@ function windowToCanvas(e){
 }
 // clear canvas function
 function clear(){
-	//ctx.fillStyle = meta.backgroundColor.toString(); 
-	//ctx.fillRect(inv*(-canvasCenter.x), inv*(canvasCenter.y - height), inv*width, inv*height);
 	ctx.clearRect(inv*(-canvasCenter.x), inv*(canvasCenter.y - height), inv*width, inv*height);
 }
 

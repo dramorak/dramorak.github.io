@@ -34,7 +34,50 @@
 				color: black;
 			}
             main {
+            	position: absolute;
+            	top:170px;
+            	bottom:0px;
             	background-color: white;
+            }
+            main:after {
+            	content:"";
+            	clear:both;
+            	display:table;
+            }
+            .col {
+            	height: 100%;
+            	padding: 15px;
+            }
+            .left{
+            	float:left;
+            	width:calc(25% - 30px);
+            	overflow-y:scroll;
+            	overflow-x:hidden;
+            }
+            /*scrollbar handling*/
+            /* Works on mozilla*/
+            .left{
+            	scrollbar-width: 12px;
+            	scrollbar-color: rgb(100,100,100) rgb(255,255,255);
+            }
+            /* Works on chrome/safari */
+            .left::-webkit-scrollbar {
+			  width: 12px;               /* width of the entire scrollbar */
+			}
+
+			.left::-webkit-scrollbar-track {
+			  background: rgb(255,255,255);        /* color of the tracking area */
+			}
+
+			.left::-webkit-scrollbar-thumb {
+			  background-color: rgb(0,0,0);    /* color of the scroll thumb */
+			  border: 3px solid rgb(255,255,255);  /* creates padding around scroll thumb */
+			}
+
+            .right{
+            	float:left;
+            	width:calc(75% - 30px);
+            	background-color: rgb(100,100,100);
             }
 			.image-container{
 				float: left;
@@ -43,10 +86,17 @@
 				margin: 15px;
 				background-color: #f2f2f2;
 			}
-			img {
+			.image-container:hover{
+				background-color: rgb();
+			}
+			.left img {
 				max-width: 100px;
 				height: auto;
 				margin: auto 0;
+			}
+			.right img{
+				max-width: 100%;
+				height: auto;
 			}
 		</style>
 	</head>
@@ -55,43 +105,57 @@
 			<h1>Gallery</h1>
 		</header>
 		<nav>
-			<a href='https://dramorak.github.io'>Home</a>
+			<a href='../index.html'>Home</a>
 		</nav>
 		<main>
-			<div class='image-container'>
-				<img src='images/bloody leaf.png' alt='Picture' title='bloody leaf'>
+			<div class='col left'>
+				<div class='image-container'>
+					<img src='images/bloody leaf.png' alt='Picture' title='bloody leaf'>
+				</div>
+				<div class='image-container'>
+					<img src='images/broccolli.png' alt='Picture' title='broccolli'>
+				</div>
+				<div class='image-container'>
+					<img src='images/deep blue.png' alt='Picture' title='deep blue'>
+				</div>
+				<div class='image-container'>
+					<img src='images/fern.png' alt='Picture' title='fern'>
+				</div>
+				<div class='image-container'>
+					<img src='images/greyscale.png' alt='Picture' title='greyscale'>
+				</div>
+				<div class='image-container'>
+					<img src='images/seaweed.png' alt='Picture' title='seaweed'>
+				</div>
+				<div class='image-container'>
+					<img src='images/Sierpiński triangle.png' alt='Picture' title='Sierpiński triangle'>
+				</div>
+				<div class='image-container'>
+					<img src='images/sierpinskis retarded cousins carpet.png' alt='Picture' title='Shitty cube'>
+				</div>
+				<div class='image-container'>
+					<img src='images/spiral power.png' alt='Picture' title='spiral'>
+				</div>
+				<div class='image-container'>
+					<img src='images/starstruck.png' alt='Picture' title='starstruck'>
+				</div>
+				<div class='image-container'>
+					<img src='images/wheat.png' alt='Picture' title='wheat'>
+				</div>
 			</div>
-			<div class='image-container'>
-				<img src='images/broccolli.png' alt='Picture' title='broccolli'>
+			<div class='col right'>
+				<img src='images/bloody leaf.png' alt='bloody leaf' title='bloody leaf'>
 			</div>
-			<div class='image-container'>
-				<img src='images/deep blue.png' alt='Picture' title='deep blue'>
 			</div>
-			<div class='image-container'>
-				<img src='images/fern.png' alt='Picture' title='fern'>
-			</div>
-			<div class='image-container'>
-				<img src='images/greyscale.png' alt='Picture' title='greyscale'>
-			</div>
-			<div class='image-container'>
-				<img src='images/seaweed.png' alt='Picture' title='seaweed'>
-			</div>
-			<div class='image-container'>
-				<img src='images/Sierpiński triangle.png' alt='Picture' title='Sierpiński triangle'>
-			</div>
-			<div class='image-container'>
-				<img src='images/sierpinskis retarded cousins carpet.png' alt='Picture' title='Shitty cube'>
-			</div>
-			<div class='image-container'>
-				<img src='images/spiral power.png' alt='Picture' title='spiral'>
-			</div>
-			<div class='image-container'>
-				<img src='images/starstruck.png' alt='Picture' title='starstruck'>
-			</div>
-			<div class='image-container'>
-				<img src='images/wheat.png' alt='Picture' title='wheat'>
-			</div>
-			
 		</main>
+		<script>
+			let left = document.querySelector('.left');
+			let highlight = document.querySelector('.right img');
+			function changeHighlight(e){
+				if (e.target.tagName !== 'IMG'){ return;}
+				highlight.src = e.target.src
+			}
+			left.addEventListener('click', changeHighlight);
+		</script>
 	</body>
 </html>

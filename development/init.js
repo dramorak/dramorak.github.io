@@ -663,3 +663,4 @@ function setDrawLimits(){
 	meta.maxScale = scale;
 	meta.maxSize = size;
 }
+

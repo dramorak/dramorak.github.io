@@ -1,6 +1,7 @@
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++
  Object/Function definition page 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
 var startRender = true;
 var test = false;
 
@@ -22,7 +23,7 @@ var meta = { // stores relevant information about the current drawstyle.
 	maxDepth : 100,
 	maxScale : 0.85,
 	maxSize: 10000,
-	operationLimit: 30000,
+	operationLimit: 11000,
 	unit: 100	// 1 unit is defined as 100 pixels.
 }
 
@@ -587,7 +588,7 @@ function setDrawLimits(){
 		// Finds the maximum scale of a new branch such that it lays below the operation limit.
 
 		let l = 0;
-		let r = 0.9;
+		let r = 0.85;
 		let count = 0;
 		let length = radii.length;
 	  let m = 0;
@@ -623,7 +624,7 @@ function setDrawLimits(){
 		while(count < 12){
 			m = (l + r) / 2
 
-			let n = countOperations(radii, m, renderThreshold, weight);
+			let n = countOperations(radii, m, renderThreshold, weight + 1);
 
 			if( n > operationLimit){
 				r = m;
@@ -635,32 +636,52 @@ function setDrawLimits(){
 
 			count += 1 ;
 		}
-
 		return l;
 	}
 
-	function cost(n){
-		if (n === 2){
+	function costMap(constructor){
+		if(constructor === Line){
 			return 1;
+		}else if(constructor === Circle){
+			return 1.22;
+		}else if (constructor === Triangle){
+			return 1.25;
+		}else if (constructor === Rectangle){
+			return 1.22;
+		}else if (constructor === Pentagon){
+			return 1.36;
+		} else if(constructor === Hexagon){
+			return 1.98;
+		} else if (constructor === Octagon){
+			return 1.92;
+		} else if (constructor === FourStar){
+			return 1.92;
+		} else if (constructor === FiveStar){
+			return 2.4;
 		} else {
-			return Math.max(n/2,1);
+			return 1;
 		}
 	}
-
 	let radii = [];
 	for(var i = 0; i < fractal.children.length; i++){
 		radii.push(fractal.children[i].transformation.size);
 	}
 
 	let maxSize = 0;
+	let weight = 0;
 	for(var i = 0; i < fractal.trunk.length; i++){
 		maxSize = Math.max(maxSize, fractal.trunk[i].size);
+		weight += costMap(fractal.trunk[i].constructor);
 	}
+	weight *= 2; // heuristic to fix laggy trunk additions.
 
-	let size = findMaxSize(radii, maxSize, 4, fractal.trunk.length, meta.operationLimit);
-	let scale = findMaxScale(radii, maxSize, 4, fractal.trunk.length, meta.operationLimit);
+	let size = findMaxSize(radii, maxSize, 4, weight, meta.operationLimit);
+	let scale = findMaxScale(radii, maxSize, 4, weight, meta.operationLimit);
+
+	if(size < 20){
+		size = 0;
+	}
 
 	meta.maxScale = scale;
 	meta.maxSize = size;
 }
-

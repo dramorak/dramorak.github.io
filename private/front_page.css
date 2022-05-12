@@ -1,0 +1,357 @@
+* {
+  font-family: system-ui, sans-serif;
+}
+
+html,
+body {
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+
+  margin: 0;
+
+  background: rgb(255, 255, 255);
+
+  overflow: hidden;
+}
+
+main {
+  position: absolute;
+  top: 0px;
+  bottom: 36px;
+  width: 100%;
+
+  background-color: rgb(255, 255, 255);
+}
+
+#menu {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 0px;
+  z-index: 2;
+
+  width: 142px;
+
+  background-color: rgb(245, 246, 247);
+  border-right: 4px solid rgb(197, 207, 223);
+  overflow: scroll;
+
+  text-align: center;
+  font-size: small;
+}
+
+.menuSection {
+  width: 124px;
+  margin-left: 3px;
+  margin-right: 3px;
+  padding-bottom: 3px;
+  border: 1px solid rgb(227, 228, 229);
+}
+
+.sectionTitle {
+  clear: both;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 7px;
+}
+
+.menuItem {
+  width: 26.5px;
+  height: 26.5px;
+  padding: 2px;
+  float: left;
+}
+.menuItem:hover {
+  padding: 1px;
+  border: 1px solid rgb(100, 141, 229);
+  background-color: rgba(100, 141, 229, 0.3);
+}
+
+.toolItem {
+  width: 21px;
+  height: 21px;
+}
+
+.informationBox {
+  position: absolute;
+  display: none;
+  z-index: 3;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.menuItem:hover .informationBox {
+  display: block;
+}
+
+.turboModeSection:hover .informationBox{
+    display:block;
+}
+
+#stroke {
+  width: 63px;
+  height: 16px;
+  margin-right: 5px;
+  margin-top: 4px;
+}
+#fill {
+  width: 46px;
+  height: 20px;
+}
+
+.undoContainer {
+  padding-left: 36px;
+}
+
+.sectionContent {
+  position: relative;
+  width: 122px;
+}
+
+.sectionContentFooter {
+  width: 122px;
+}
+
+#file .sectionTitle {
+  color: white;
+  background-color: rgb(41, 140, 225);
+}
+.after {
+  display: block;
+  clear: both;
+}
+
+.branchContainer {
+  margin: auto;
+  height: 45px;
+  width: 52px;
+  padding: 1px;
+  border: 1px solid rgb(227, 228, 229);
+  background-color: rgb(255, 255, 255);
+}
+
+.branchContainer:hover {
+  padding: 1px;
+  border: 1px solid rgb(100, 141, 229);
+  background-color: rgba(100, 141, 229, 0.3);
+}
+.menuImage {
+  margin: auto;
+}
+
+#branch .menuImage {
+  height: 45px;
+  width: 52px;
+  display: block;
+}
+
+.thicknessContainer {
+  width: 70px;
+  height: 40px;
+  padding: 2px;
+  margin: 0 auto;
+}
+
+.thicknessContainer:hover {
+  padding: 1px;
+  border: 1px solid rgb(100, 141, 229);
+  background-color: rgba(100, 141, 229, 0.3);
+}
+
+.thicknessInputMenuContainer {
+  display: none;
+  position: absolute;
+  top: 120px;
+  left: 100px;
+  width: 135px;
+  height: 136px;
+
+  z-index: 3;
+
+  border: 1px solid rgb(227, 228, 229);
+  background-color: rgb(255, 255, 255);
+}
+
+.thicknessOption {
+  width: 131px;
+  height: 30px;
+
+  padding: 2px;
+}
+
+.thicknessOption:hover {
+  background-color: rgba(100, 141, 229, 0.3);
+}
+
+#shapes .sectionContent {
+  background-color: rgb(255, 255, 255);
+}
+
+.colorStyle {
+  width: 120px;
+  padding: 2px;
+}
+#drawColor {
+  width: 24px;
+  height: 24px;
+}
+#backgroundColor {
+  width: 24px;
+  height: 24px;
+}
+.label {
+  float: left;
+  margin-top: 7px;
+  margin-left: 5px;
+  font-size: 80%;
+}
+.colorBox {
+  float: left;
+  width: 16px;
+  height: 16px;
+  padding: 2px;
+  margin: 1px;
+  border: 1px solid rgb(0, 0, 0);
+  background-color: rgb(245, 246, 247);
+}
+.colorBoxInterior {
+  width: 100%;
+  height: 100%;
+}
+#centerpiece {
+  display: block;
+  width: 500px;
+  height: auto;
+  margin: 125px auto auto 200px;
+}
+
+label {
+  display: inline-block;
+  font-size: 80%;
+  text-align: right;
+}
+.rgb {
+  margin: 5px 2px 5px 0;
+  height: 18px;
+  width: 28px;
+  
+}
+#fading {
+    height:18px;
+    width: 85px;
+}
+#fadeLabel {
+    vertical-align: middle;
+    padding:0px 0px 12px 0px;
+}
+.selected {
+  padding: 1px;
+  border: 1px solid rgb(100, 141, 229);
+  background-color: rgba(100, 141, 229, 0.3);
+}
+
+canvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+}
+#backgroundCanvas {
+  z-index: 1;
+}
+
+footer {
+  position: absolute;
+  background-color: rgb(230, 231, 232);
+  width: 100%;
+  height: 36px;
+  bottom: 0;
+
+  font-size: small;
+}
+
+.footer-left{
+    float:left;
+    height: 30px;
+    margin: 3px;
+    margin-left: 5px;
+
+    display:flex;
+}
+
+.footer-right {
+  float: right;
+  height: 30px;
+  margin: 3px;
+  margin-right: 5px;
+
+  display:flex;
+}
+
+.hyperlinks {
+    padding-right: 5px;
+    padding-left: 5px;
+    border-right: 2px solid grey;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color: rgb(80,80,80);
+  }
+
+  .footer-right .hyperlinks {
+      border: 0;
+  }
+.pictures {
+  height: 30px;
+  width: 30px;
+}
+
+a {
+  color: rgb(80, 80, 80);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+#noscript {
+    margin:auto auto auto 200px;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background:#555;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+@media only screen and (max-width: 916px) {
+    .footer-left { 
+        display:none;
+    }
+    footer {
+        display:flex;
+        align-items:center;
+        justify-content:center;       
+    }
+    /*
+    #customColor {
+        display:none;
+    }
+    #customColorLabel {
+        display:none;
+    }
+    #file {
+        display:none;
+    }
+    */
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang='en-us'>
+    <head>
+        <title>Lessons</title>
+        <meta name='description' content="articles on topics I've covered for students.">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            html, body {
+                margin: 0;
+                height: 100%;
+                width: 100%;
+                
+                background-color: rgb(254,254,254);
+                font-family: courier, arial;
+                color: rgb(40, 40, 40);
+            }
+            .center {
+                position: absolute;
+                height: 100%;
+                width:  60%;
+                left: 20%;
+            }
+            a {
+                text-decoration: none; 
+                color: rgb(0,0,80); 
+            }
+            a:hover {
+                color: rgb(255,180,0);
+                text-decoration: underline;
+            }
+            .link {
+                margin: auto 8px;
+            }
+            .left{
+                float:left;
+            }
+            .right{
+                float:right;
+            }
+            footer {
+                position: fixed;
+                width: 60%;
+                bottom:0px;
+
+                border-top: 1px black solid;
+                background-color:rgba(255,160,0,0.2);
+            }
+
+            main {
+                width: 90%;
+                margin: auto;
+            }
+
+            article { 
+                padding-top: 10px;
+                padding-bottom:15px;
+
+                border-bottom: 1px solid black;
+            }
+
+            h2 {
+                font-size:20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="center">
+            <header><h1>Blog</h1></header>
+            <hr>
+            <main>
+                <article>
+                    <h2><time datetime="2022-05-02">May 2022</time>:First Post!</h2>
+                    <p>Hey! Welcome to the blog. I haven't decided what to write yet; to be honest, I don't think that I really have any thoughts worth sharing.</p>
+                    <p> I'll keep this up until I think of something I'd like others to look at. In the meantime, check out my <a href='../projects/projecthub.html'><strong>Projects</strong></a>! There's some stuff there that's actually worth sharing.</p>
+                </article>
+            </main>
+            <footer>
+                <div class="left link"><a href='../index.html'>Main</a></div>
+                <div class="right link"><a href="../gallery.html">Gallery</a></div>
+                <div class="right link"><a href="../projects/projecthub.html">Projects</a></div>
+                <div class="right link"><a href="../lessons/lessonhub.html">Lessons</a></div>
+                <div class="right link"><a href="../blog/blog.html">Blog</a></div>
+            </footer>
+        </div>
+    </body>
+</html>

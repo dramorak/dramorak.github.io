@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang='en-us'>
+    <head>
+        <title>Projects</title>
+        <meta name='description' content="articles on topics I've covered for students.">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            html, body {
+                margin: 0;
+                height: 100%;
+                width: 100%;
+                
+                background-color: rgb(254,254,254);
+                font-family: courier, arial;
+                color: rgb(40, 40, 40);
+            }
+            .center {
+                position: absolute;
+                height: 100%;
+                width:  60%;
+                left: 20%;
+            }
+            a {
+                text-decoration: none;
+                color: rgb(0,0,80);
+            }
+            a:hover {
+                color: rgb(255,180,0);
+                text-decoration: underline;
+            }
+            .link {
+                display:block;
+                margin: auto 8px;
+            }
+            .left{
+                float:left;
+            }
+            .right{
+                float:right;
+            }
+            footer {
+                position: fixed;
+                width: 60%;
+                bottom:0px;
+
+                border-top: 1px black solid;
+                background-color:rgba(255,160,0,0.2);
+            }
+            main {
+                width:60%;
+                margin: auto;
+            }
+            img {
+                display: block;
+                width: 100%;
+            }
+            article {
+                padding-top: 14px;
+                padding-bottom: 14px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="center">
+            <header>
+                <h1>Projects</h1>
+                <p>A collection of some of the larger projects I've worked on. The rest of my open source projects can be found on my <a href="https://github.com/dramorak"><strong>Github page</strong></a>.</p>
+            </header>
+            <hr>
+            <main>
+                <article>
+                    <a href="https://branchbranchbranch.com" title="branchbranchbranch.com"><img src="../images/bloody leaf.png" alt="Bloody Leaf Fractal"></a>
+                    <h2><a href="https://branchbranchbranch.com">branchbranchbranch.com</a></h2>
+                    <p>A fractal generation program with a simple ui well suited for play.</p>
+                    <hr>
+                </article>
+                <article>
+                    <a href="../development/index.html" title="gravity ball"><img src="../images/planet pitch.png" alt="gravity ball"/></a>
+                    <h2><a href="../development/index.html">gravity ball</a></h2>
+                    <p>A simple gravity simulation program where I play with collisions, physics.</p>
+                </article>
+            </main>
+            <footer>
+                <div class="left link"><a href='../index.html'>Main</a></div>
+                <div class="right link"><a href="../gallery.html">Gallery</a></div>
+                <div class="right link"><a href="../lessons/lessonhub.html">Lessons</a></div>
+                <div class="right link"><a href="../blog/blog.html">Blog</a></div>
+            </footer>
+        </div>
+    </body>
+</html>

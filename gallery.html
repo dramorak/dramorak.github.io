@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<meta charset='utf-8'>
+		<title>Dramorak's gallery</title>
+		<meta name='description' content='A gallery of artwork and other images I find interesting to look at.'>
+		<style>
+			* {
+				font-family: arial, helvetica;
+			}
+			body{
+				margin:0;
+			}
+			header {
+				background-color: rgb(240,240,240);
+				text-align: center;
+				padding: 20px;
+			}
+
+			nav {
+				background-color: rgb(79,79,79);
+				overflow: hidden;
+			}
+
+			nav a{
+				display: block;
+				padding: 15px 16px;
+				float: left;
+				text-align: center;
+				color: #f2f2f2;
+				text-decoration: none;
+			}
+
+			nav a:hover{
+				background-color: #f2f2f2;
+				color: black;
+			}
+            main {
+            	position: absolute;
+            	top:167px;
+            	bottom:0px;
+            	background-color: white;
+            }
+            main:after {
+            	content:"";
+            	clear:both;
+            	display:table;
+            }
+            .col {
+            	height: 100%;
+            	float: left;
+            }
+            .left{
+            	width:calc(25% - 30px);
+            	height:calc(100% - 30px);
+            	overflow-y:scroll;
+            	overflow-x:hidden;
+            	padding: 15px;
+            }
+            /*scrollbar handling*/
+            /* Works on mozilla*/
+            .left{
+            	scrollbar-width: 12px;
+            	scrollbar-color: rgb(100,100,100) rgb(255,255,255);
+            }
+            /* Works on chrome/safari */
+            .left::-webkit-scrollbar {
+			  width: 12px;               /* width of the entire scrollbar */
+			}
+
+			.left::-webkit-scrollbar-track {
+			  background: rgb(255,255,255);        /* color of the tracking area */
+			}
+
+			.left::-webkit-scrollbar-thumb {
+			  background-color: rgb(0,0,0);    /* color of the scroll thumb */
+			  border: 3px solid rgb(255,255,255);  /* creates padding around scroll thumb */
+			}
+			.divider { 
+				width: 3px;	
+				background-color: rgb(0,0,0);
+			}
+			.divider:hover { 
+			}
+            .right{
+            	height:calc(100% - 30px);
+            	width:calc(75% - 33px);
+            	background-color: rgb(100,100,100);
+            	padding:15px;
+            }
+			.image-container{
+				float: left;
+				width: 100px;
+				padding: 14px;
+				margin: 15px;
+				background-color: #f2f2f2;
+			}
+			.image-container:hover{
+				background-color: rgb();
+			}
+			.left img {
+				max-width: 100px;
+				height: auto;
+				margin: auto 0;
+			}
+			.right img{
+				max-width: 100%;
+				height: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>Gallery</h1>
+		</header>
+		<nav>
+			<a href='index.html'>Home</a>
+		</nav>
+		<main>
+			<div class='col left'>
+				<div class='image-container'>
+					<img src='images/bloody leaf.png' alt='Picture' title='bloody leaf'>
+				</div>
+				<div class='image-container'>
+					<img src='images/broccolli.png' alt='Picture' title='broccolli'>
+				</div>
+				<div class='image-container'>
+					<img src='images/deep blue.png' alt='Picture' title='deep blue'>
+				</div>
+				<div class='image-container'>
+					<img src='images/fern.png' alt='Picture' title='fern'>
+				</div>
+				<div class='image-container'>
+					<img src='images/greyscale.png' alt='Picture' title='greyscale'>
+				</div>
+				<div class='image-container'>
+					<img src='images/seaweed.png' alt='Picture' title='seaweed'>
+				</div>
+				<div class='image-container'>
+					<img src='images/Sierpiński triangle.png' alt='Picture' title='Sierpiński triangle'>
+				</div>
+				<div class='image-container'>
+					<img src='images/sierpinskis retarded cousins carpet.png' alt='Picture' title='Shitty cube'>
+				</div>
+				<div class='image-container'>
+					<img src='images/spiral power.png' alt='Picture' title='spiral'>
+				</div>
+				<div class='image-container'>
+					<img src='images/starstruck.png' alt='Picture' title='starstruck'>
+				</div>
+				<div class='image-container'>
+					<img src='images/wheat.png' alt='Picture' title='wheat'>
+				</div>
+			</div>
+			<div class='col divider'>
+			</div>
+			<div class='col right'>
+				<img src='images/bloody leaf.png' alt='bloody leaf' title='bloody leaf'>
+			</div>
+			</div>
+		</main>
+		<script>
+			let left = document.querySelector('.left');
+			let highlight = document.querySelector('.right img');
+			let right = document.querySelector('.right');
+			let divider = document.querySelector('.divider');
+
+			function changeHighlight(e){
+				if (e.target.tagName !== 'IMG'){ return;}
+				highlight.src = e.target.src;
+				highlight.title = e.target.title;
+			}
+			left.addEventListener('click', changeHighlight);
+
+			/*
+			let resize = false;
+			function resizeDivider(x){ 
+				let maxWidth = window.innerWidth;
+				let leftWidth = Math.min(Math.max(x - 30), maxWidth - 63);
+				left.style.width = leftWidth + 'px';
+				right.style.width = Math.min(maxWidth - 63, Math.max(maxWidth - leftWidth - 63, 0)) + 'px';
+			}
+			divider.addEventListener('mousedown', function() {
+				resize = true;
+			}); 
+			window.addEventListener('mouseup', function(){
+				resize = false;
+			})
+			window.addEventListener('mousemove', function(e){
+				if (resize){
+					resizeDivider(e.clientX);
+				}
+			});
+
+			window.addEventListener('resize', function(e){
+				let l= left.clientWidth;
+				let r = right.clientWidth;
+
+				console.log('\n' + l + ' : ' + r);
+				// Format into numbers.
+				let total = l + r + 3;
+
+				let newL = (l / total) * window.innerWidth;
+				let newR = (r / total) * window.innerWidth;
+
+				left.style.width = (newL - 30) + 'px';
+				right.style.width = (newR - 33) + 'px';
+			})
+			*/
+		</script>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Quadratic forms </title>
+        <style>
+
+        </style>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    <body>
+        <!-- When teachinga new subject:
+            -what is it (brief summary)
+            -why is it important
+            -some history 
+            Then go in there and really flesh out the concept.-->
+        <h1>Quadratic Forms</h1>
+        <h3>Introduction</h3>
+        <p>"Quadratics" is the study of polynomials of degree 2. It is a staple of almost all upper year high school math programs. They have wide ranging applications in almost
+            all fields of mathematics; complicated functions can often be locally approximated by a much simpler quadratic form, making sometimes complicated relations easier
+            to work with and calculate. Many physical relations fall into the study of quadratics as well, including area calculation, dynamics/kinematics, light modulation, 
+            and more.</p>
+        <p>The study of quadratics is ancient. The earliest solutions to quadratic equations were geometric. Euclid, in 300BC, used geometric methods to solve problems
+            that reduce to quadratic equations in his book Elements. Nearly 1000 years later, in india, the first explicit formula for the roots of a quadratic were given by
+            the mathematician, Brahmagupta, who gave the solution in words:
+        </p>
+        <p>"<i>To the absolute number multiplied by four times the [coefficient of the] square, add the square of the [coefficient of the] middle term; the square root of the same, less the [coefficient of the] middle term, being divided by twice the [coefficient of the] square is the value.
+        </i>"</p>
+        <p> which is a confusing way of writing the equation: \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]</p><!-- put TEX here.-->
+        <p>Even later, in the 1600's, Renes Descartes used graphs to provide geometric interpretations of quadratics.</p>
+        <h3>Quadratic Equations</h3>
+        <p>The question I'll be working towards today is this: given a quadratic equation, find it's solutions.\[ax^2 + bx + c = 0\]</p>
+        <p>To be honest, this is hard to answer. I personally only know how to solve quadratics that are in the following form: \(d(x-e)(x-f) = 0\), that is, the product of two linear 
+        expressions. It's easy to see the solutions to this equation: the left hand side is 0 only if one or both of the linear expressions are zero: \(x - e = 0\) or \(x - f = 0\).
+        </p>
+        <p> So let's run with that. I'll take the general quadratic polynomial and rewrite it in a form I know how to solve. Let's say the polynomial I want to rewrite is
+            \(ax^2 + bx + c\). Ideally, I want it to look something like \(d(x - e)(x - f)\) They look different, but maybe if I can find special values of d,e, and f, then the two will be equal. With 
+            that in mind, let's set the two representations equal to eachother for all values of x.
+        </p>
+        <p>\[ax^2 + bx + c = d(x - e)(x - f)\]</p>
+        <p>Expand: \[ax^2 + bx + c = d(x^2 - ex - fx + ef) \]</p>
+        <p>Bring to one side: \[(a - d)x^2 + (b + de + df)x + (c - def) = 0\]</p>
+        <p>
+            A few algebraic manipulations later, and look what we have: a new polynomial equal to 0 for all values of x. What does it mean for a polynomial to be 0 for 
+            all values of x? It means that every coefficient must be 0. That's a lot of good information: \(a - d = 0\), \(b + de + df = 0\), and \( c - def = 0\)
+        </p> 
+        <p> Rearanging things a bit, we see that: \(a = d\), \(b = -(de + df)\), and \(c = def\)</p>
+        <p>If we're a little creative here, we can see that this gives us more than a way to find a,b, and c in terms of d,e, and f. It actually gives us d,e, and f in 
+            terms of a,b, and c, too. \[d = a\] \[e + f = -b \over a\] \[ ef = c \over a\]
+        </p>
+        <p> 
+        <p>And that's all there is to it. The two polynomials are equal, so they must have the same roots. And the roots are now easy to find since one of the polynomials
+            is in a factored form. 
+        </p>
+        <h3>Followup</h3>
+        <p> There are more representations than these two for quadratics. It all depends on what information you want to tickle out of your polynomial. A very common 
+            representation is the 'complete square' form:. It's occasionally useful for graphing purposes. You can also use this form to find roots too; in fact, you can 
+            use this representation to find the very famous 'root' formula, \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
+        </p>
+        <p>I'll give a quick proof here. It follows the same logic as for the factored form above.</p>
+        <p></p>    
+         
+    </body>
+</html>

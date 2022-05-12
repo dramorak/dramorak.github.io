@@ -1,0 +1,171 @@
+<!<!DOCTYPE html>
+<html lang='en-us'>
+    <head>
+        <title>Alex Inglis</title>
+        <meta name='description' content='A personal webpage'>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            html, body {
+                margin: 0;
+                height: 100%;
+                width: 100%;
+                
+                background-color: rgb(254,254,254);
+                font-family: courier, arial;
+                font-size: small;
+                color: rgb(40, 40, 40);
+            }
+            .center {
+                position: absolute;
+                height: 100%;
+                width:  60%;
+                left: 20%;
+            }
+            .main-image{
+                width:100%;
+                height:80%;
+            }
+            nav {
+                width: 100%;
+                height: 16px;
+            }
+            a {
+                text-decoration: none;
+                color: rgb(0,0,80);
+            }
+            a:hover {
+                color: rgb(255,180,0);
+                text-decoration: underline;
+            }
+            .link {
+                margin: 0 8px;
+            }
+            .left{
+                float:left;
+            }
+            .right{
+                float:right;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="center">
+            <div class="main-image">
+            <a href='https://branchbranchbranch.com'><canvas title="branchbranchbranch.com">Alex Inglis</canvas></a>
+            </div>
+            <h2 style="margin:0 8px;color:black;">Alex Inglis</h2>
+            <hr>
+            <nav>
+                <div class="left link"><a href='https://branchbranchbranch.com'>branchbranchbranch.com</a></div>
+                <div class="right link"><a href="gallery.html">Gallery</a></div>
+                <div class="right link"><a href="projects/projecthub.html">Projects</a></div>
+                <div class="right link"><a href="lessons/lessonhub.html">Lessons</a></div>
+                <div class="right link"><a href="blog/blog.html">Blog</a></div>
+            </nav>
+        </div>
+
+        <script>
+            let s = (t) => Math.sin(2*Math.PI*t/1000);
+            let c = (t) => Math.cos(2*Math.PI*t/1000);
+            let t = (t) => Math.tan(2*Math.PI*t/1000);  
+            let offsetY = 60;
+            let speed = 0.75;
+            let pi = Math.PI;
+            let seed_angle1 = Math.random() * 2 * pi;
+            let seed_angle2 = Math.random() * 2 * pi;
+
+            const canvas = document.querySelector('canvas');
+            const canvas_container = document.querySelector('.main-image');
+            const ctx = canvas.getContext('2d');
+
+            width  = canvas.width = canvas_container.clientWidth;
+            height = canvas.height = canvas_container.clientHeight;
+            ctx.setTransform(1,0,0,-1, width/2, height/2 + offsetY);
+
+            let fractal = {
+                objects:[],
+                branches:[],
+                draw: function(ctx){
+                    function helper(node, depth){
+                        if (depth > 9){return;}
+
+                        node.draw(ctx);
+
+                        for(let i=0;i<fractal.branches.length;i++){
+                            helper(fractal.branches[i].apply(node), depth + 1);
+                        }
+                    }
+
+                    for(let i = 0; i < fractal.objects.length; i++){
+                        helper(fractal.objects[i], 0);
+                    }
+                }
+            }
+            
+            class Point{
+                constructor(x,y){
+                    this.x = x;
+                    this.y = y;
+                }
+                draw(ctx){
+                    ctx.fillStyle = `hsl(${Math.atan2(this.y-offsetY,this.x) * 57},100%,50%)`
+                    ctx.fillRect(this.x-2,this.y-2,4,4);
+                }
+            }
+            class Transformation{
+                constructor(a,b,c,d,e,f){
+                    this.a = a;
+                    this.b = b;
+                    this.c = c;
+                    this.d = d;
+                    this.e = e;
+                    this.f = f;
+                }
+                apply(node){
+                    let x = node.x * this.a + node.y * this.b + this.e;
+                    let y = node.x * this.c + node.y * this.d + this.f;
+                    return new Point(x,y);
+                }
+            }
+            generateFromAngle = function(theta, r, e ,f){
+                return new Transformation(r*Math.cos(theta), -r*Math.sin(theta), r*Math.sin(theta), r*Math.cos(theta), e, f);
+            }
+            function u(t){
+                // clear canvas
+                ctx.clearRect(-width/2, -height/2 + offsetY, width, height);
+
+                // moving particle effect
+                fractal.objects = [];
+                for(let i = 0; i < 3; i++){
+                    x = 0;
+                    y = 30*(s(1.507*i**i + i*t/20) + 1);
+                    fractal.objects.push(new Point(x,y));
+                }
+
+                
+                //moving branch effects
+                b1 = generateFromAngle(seed_angle1 + speed*2*pi*t/10000*1.11297614, 0.85, 0, 60);
+                b2 = generateFromAngle(seed_angle2 - speed*pi*t/10000, 0.85, 0, 60);
+                fractal.branches = [b1, b2];    
+                
+                //draw fractal
+                fractal.draw(ctx);
+            }
+            
+            // add resize event handler
+            window.addEventListener('resize', function(){
+                width  = canvas.width = canvas_container.clientWidth;
+                height = canvas.height = canvas_container.clientHeight;
+                ctx.setTransform(1,0,0,-1, width/2, height/2 + offsetY);
+            });
+
+            function render(t){
+                u(t);
+                window.requestAnimationFrame(render);
+            }
+            window.addEventListener('load', render);
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title>permutations and combinations</title>
+        <meta name="description" content="counting permutations and combinations">
+        
+		<meta charset="utf-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <style>
+            html, body {
+                margin: 0px;
+                background-color: rgb(30, 30, 35);
+                color: rgb(235, 235, 235);
+                font-family: "Lucida Console"
+            }
+            main {
+                display: flex;
+            }
+            .left {
+                flex: 1 1 25%;
+            }
+            .middle {
+                flex: 1 1 50%;
+
+                display:flex;
+                flex-direction: column;
+            }
+            .header {
+                flex: 1 1 auto;
+
+                margin: 10px 0 60px 0;
+            }
+            .header h1{
+                color: rgb(194, 0, 0);
+            }
+            .content {
+                flex: 15 1 auto;
+                margin: 10px 0 20px 0;
+                line-height:1.5em;
+            }
+            .content h2 {
+                margin: 40px 0 20px 0;
+                color: rgb(194, 0, 0);
+            }
+            .content p {
+                margin: 20px 0 10px 0;
+            }
+            .content img{
+                display:block;
+                margin:10px auto 10px
+            }
+            .content .center-text {
+                text-align:center;
+            }
+            .footer {
+                flex: 1 1 auto;
+                margin:  0 0 20px 0;
+                display:flex;
+                flex-direction: row-reverse;
+                align-items: center;
+
+                font-size:x-small;
+            }
+            .right {
+                flex: 1 1 25%;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div class="left"></div>
+            <div class="middle">
+                <div class="header">
+                    <h1>Permutations and Combinations</h1>
+                    <div><a href="../index.html">Main Page</a></div>
+                    <div><strong>Dramorak</strong> 2022-04-10</div>
+                </div>
+                <div class="content">
+                    <p>A large class of counting problems fall under the categories of 'permutation' and 'combination'. For example, almost all 
+                       card games can be thought of as selecting permutations or combinations of cards. Since the field is so common, tools have been developed 
+                       to simplify the counting.
+                    </p>
+                    <h2>What are combinations and permutations?</h2>
+                    <p>A permutation is a method of arranging all the elements from a collection in order.<br>
+                        A combination is a selection of elements from a collection.</p>
+                    <p>For example, the number of ways you can draw 5 cards from a deck is a permutation. The number of 5 card hands is a combination.</p>
+                    <img src="images/permutationvscombination.png" alt="combination vs permutation">
+                    <h2>Counting permutations</h2>
+                    <p>Counting permutations is relatively simple. Look at the number of ways you have choosing the first element, then the second, then
+                        the third..., and since these actions are independent of one another, you simply multiply them to get the total number of permutations.
+                        The way we write this is:
+                    </p>
+                    <p class="center-text">\(_nP_r = \frac{n!}{r!}\)</p>
+                    <h2>Counting combinations</h2>
+                    <p>Combinations are bit trickier. Let's first ask: What's the relationship between combinations and permutations?</p>
+                    <p>Let's think about a slightly different way of finding a permutation of elements. Say we're picking 5 cards 
+                        from a deck. One way to do that would be to first pick they types of cards, and then, after having chosen 
+                        them, pick an arangement.
+                    </p>
+                    <img src="images/findingpermutation.png" alt='finding a permutation in terms of a combination'>
+                    <p>Notice that these two actions are independent of one another. That means that the total number of permutations is just 
+                        the number of 5 card hands, multiplied by the number of ways we can order those 5 cards:
+                    </p>
+                    <p class="center-text">\(_{52}P_5 = [\text{Ways of choosing 5 cards}] * (_5P_5)\)</p>
+                    <p>But look! The number of ways to choose 5 cards is <em>exactly</em> what we're looking for: the combination! Thus:</p>
+                    <p class="center-text">\(\text{Ways of choosing 5 cards} = \frac{_{52}P_5}{_5P_5}\)</p>
+                    <p>We introduce a shorthand for "Ways of choosing 5 cards":</p>
+                    <p class="center-text">\(_{52}C_5 = \frac{_{52}P_5}{_5P_5}\)</p>
+                    </p>
+                    <p>In general, when choosing r elements from a collection of n elements, we write:</p>
+                    <p class="center-text">\(_nC_r = \frac{_nP_r}{_rP_r}\)</p>
+                    <p>or</p>
+                    <p class="center-text">\(_nC_r = \frac{n!}{r!(n-r)!}\)</p>
+                    <h2>Wrapping up</h2>
+                    <p>The fundamental strategy for dealing with combination problems is first looking at the number of permutations and 
+                        working backwards.
+                    </p>         
+                </div>
+                <div class="footer">
+                    <div>Dramorak © 2022</div>
+                </div>
+            </div>
+            <div class="right"></div>
+        </main>    
+    </body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<title>Canvas benchmarks</title>
+		<meta name='description' content="Clear benchmark">
+		<meta charset='utf-8'>
+
+		<style>
+			table, tr, th {
+				border: 1px solid black;
+				min-width: 4em;
+			}
+		</style>
+		<script>
+			let canvas = document.createElement('canvas');
+			let ctx = canvas.getContext('2d');
+
+			width = canvas.width = 200;
+			height = canvas.height = 200;
+
+			function metaBenchmark(f){
+				function benchMark(n){
+					let s = Date.now();
+					for(var i = 0; i < n; i++){
+						f();
+					}
+					return Date.now() - s;
+				}
+				return benchMark;
+			}
+
+			// clear Rect vs fill Rec
+			function clearRect(){
+				ctx.clearRect(0,0,200,200);
+			}
+			function fillRect(){
+				ctx.fillRect(0,0,200,200);
+			}
+
+			let clearRectTest = metaBenchmark(clearRect);
+			let fillRectTest = metaBenchmark(fillRect);
+
+			function runClearTest(){
+				document.querySelector('#fillRect10').innerHTML = fillRectTest(10);
+				document.querySelector('#fillRect100').innerHTML = fillRectTest(100);
+				document.querySelector('#fillRect1000').innerHTML = fillRectTest(1000);
+				document.querySelector('#fillRect10000').innerHTML = fillRectTest(10000);
+				document.querySelector('#fillRect100000').innerHTML = fillRectTest(100000);
+				document.querySelector('#fillRect1000000').innerHTML = fillRectTest(1000000);
+
+				document.querySelector('#clearRect10').innerHTML = clearRectTest(10);
+				document.querySelector('#clearRect100').innerHTML = clearRectTest(100);
+				document.querySelector('#clearRect1000').innerHTML = clearRectTest(1000);
+				document.querySelector('#clearRect10000').innerHTML = clearRectTest(10000);
+				document.querySelector('#clearRect100000').innerHTML = clearRectTest(100000);
+				document.querySelector('#clearRect1000000').innerHTML = clearRectTest(1000000);
+			}
+
+			// .lineTo() impact on draw performance.
+			function one(){
+				ctx.beginPath();
+				ctx.moveTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.stroke();
+			}
+			oneTest = metaBenchmark(one);
+			function two(){
+				ctx.beginPath();
+				ctx.moveTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.stroke();
+			}
+			twoTest = metaBenchmark(two);
+			function three(){
+				ctx.beginPath();
+				ctx.moveTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.stroke();
+			}
+			threeTest = metaBenchmark(three);
+			function four(){
+				ctx.beginPath();
+				ctx.moveTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.stroke();
+			}
+			fourTest = metaBenchmark(four);
+			function five(){
+				ctx.beginPath();
+				ctx.moveTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.stroke();
+			}
+			fiveTest = metaBenchmark(five);
+			function six(){
+				ctx.beginPath();
+				ctx.moveTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.stroke();
+			}
+			sixTest = metaBenchmark(six);
+			function seven(){
+				ctx.beginPath();
+				ctx.moveTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.stroke();
+			}
+			sevenTest = metaBenchmark(seven);
+			function eight(){
+				ctx.beginPath();
+				ctx.moveTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.stroke();
+			}
+			eightTest = metaBenchmark(eight);
+			function nine(){
+				ctx.beginPath();
+				ctx.moveTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.stroke();
+			}
+			nineTest = metaBenchmark(nine);
+			function ten(){
+				ctx.beginPath();
+				ctx.moveTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.lineTo(100,100);
+				ctx.lineTo(0,0);
+				ctx.stroke();
+			}
+			tenTest = metaBenchmark(ten);
+			function drawCircle(){
+				ctx.beginPath();
+				ctx.moveTo(100,50);
+				ctx.arc(50,50,50,0, 2*Math.PI)
+			}
+			circleTest = metaBenchmark(drawCircle);
+			function runLineToTest(){
+				let m = {1:oneTest, 2:twoTest, 3:threeTest, 4:fourTest, 5:fiveTest, 6:sixTest, 7:sevenTest, 8:eightTest, 9:nineTest, 10:tenTest};
+				for(var i = 1; i < 6; i++){
+					for(var j = 1; j < 11; j++){
+						document.querySelector(`#d${j}_${10**i}`).innerHTML = m[j](10**i);
+					}
+					document.querySelector(`#circle${10**i}`).innerHTML = circleTest(10**i);
+				}
+
+			}
+
+		</script>
+	</head>
+	<body>
+		<h1>Canvas benchmarks</h1>
+		<h2>Clear Methods</h2>
+		<p>Clearing a 200px * 200px canvas.</p>
+		<button id='clear'>Run 'clear' test.</button>
+		<table>
+			<tr>
+				<th>Count</th>
+				<th>fillRect</th>
+				<th>clearRect</th>
+			</tr>
+			<tr>
+				<th>10</th>
+				<th id='fillRect10'></th>
+				<th id='clearRect10'></th>
+			</tr>
+			<tr>
+				<th>100</th>
+				<th id='fillRect100'></th>
+				<th id='clearRect100'></th>
+			</tr>
+			<tr>
+				<th>1000</th>
+				<th id='fillRect1000'></th>
+				<th id='clearRect1000'></th>
+			</tr>			
+			<tr>
+				<th>10000</th>
+				<th id='fillRect10000'></th>
+				<th id='clearRect10000'></th>
+			</tr>
+			<tr>
+				<th>100000</th>
+				<th id='fillRect100000'></th>
+				<th id='clearRect100000'></th>
+			</tr>
+			<tr>
+				<th>1000000</th>
+				<th id='fillRect1000000'></th>
+				<th id='clearRect1000000'></th>
+			</tr>
+		</table>
+
+		<h2>lineTo tests</h2>
+		<p>Call 'ctx.lineTo()' n times before drawing.</p>
+		<button id='lineTo'>Run 'clear' test.</button>
+		<table>
+			<tr>
+				<th>Count</th>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>6</th>
+				<th>7</th>
+				<th>8</th>
+				<th>9</th>
+				<th>10</th>
+				<th>circle</th>
+			</tr>
+			<tr>
+				<th>10</th>
+				<th id='d1_10'></th>
+				<th id='d2_10'></th>
+				<th id='d3_10'></th>
+				<th id='d4_10'></th>
+				<th id='d5_10'></th>
+				<th id='d6_10'></th>
+				<th id='d7_10'></th>
+				<th id='d8_10'></th>
+				<th id='d9_10'></th>
+				<th id='d10_10'></th>
+				<th id='circle10'></th>
+			</tr>
+			<tr>
+				<th>100</th>
+				<th id='d1_100'></th>
+				<th id='d2_100'></th>
+				<th id='d3_100'></th>
+				<th id='d4_100'></th>
+				<th id='d5_100'></th>
+				<th id='d6_100'></th>
+				<th id='d7_100'></th>
+				<th id='d8_100'></th>
+				<th id='d9_100'></th>
+				<th id='d10_100'></th>
+				<th id='circle100'></th>
+			</tr>
+			<tr>
+				<th>1000</th>
+				<th id='d1_1000'></th>
+				<th id='d2_1000'></th>
+				<th id='d3_1000'></th>
+				<th id='d4_1000'></th>
+				<th id='d5_1000'></th>
+				<th id='d6_1000'></th>
+				<th id='d7_1000'></th>
+				<th id='d8_1000'></th>
+				<th id='d9_1000'></th>
+				<th id='d10_1000'></th>
+				<th id='circle1000'></th>
+			</tr>			
+			<tr>
+				<th>10000</th>
+				<th id='d1_10000'></th>
+				<th id='d2_10000'></th>
+				<th id='d3_10000'></th>
+				<th id='d4_10000'></th>
+				<th id='d5_10000'></th>
+				<th id='d6_10000'></th>
+				<th id='d7_10000'></th>
+				<th id='d8_10000'></th>
+				<th id='d9_10000'></th>
+				<th id='d10_10000'></th>
+				<th id='circle10000'></th>
+			</tr>
+			<tr>
+				<th>100000</th>
+				<th id='d1_100000'></th>
+				<th id='d2_100000'></th>
+				<th id='d3_100000'></th>
+				<th id='d4_100000'></th>
+				<th id='d5_100000'></th>
+				<th id='d6_100000'></th>
+				<th id='d7_100000'></th>
+				<th id='d8_100000'></th>
+				<th id='d9_100000'></th>
+				<th id='d10_100000'></th>
+				<th id='circle100000'></th>
+			</tr>
+			<tr>
+				<th>1000000</th>
+				<th id='d1_1000000'></th>
+				<th id='d2_1000000'></th>
+				<th id='d3_1000000'></th>
+				<th id='d4_1000000'></th>
+				<th id='d5_1000000'></th>
+				<th id='d6_1000000'></th>
+				<th id='d7_1000000'></th>
+				<th id='d8_1000000'></th>
+				<th id='d9_1000000'></th>
+				<th id='d10_1000000'></th>
+				<th id='circle1000000'></th>
+			</tr>
+		</table>
+		<script>
+			document.querySelector('#clear').addEventListener('click', runClearTest);
+			document.querySelector('#lineTo').addEventListener('click', runLineToTest);
+		</script>
+	</body>
+</html>

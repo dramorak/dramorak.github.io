@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title>What are fractals?</title>
+        <meta charset="utf-8">
+        <meta name="content" description="A guide to beautiful, scintillating, infinite fractals.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">    
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <style>
+            * {
+                font-family: "Lucida Console", monaco;
+            }
+            html {
+                min-height: 100vh;
+            }
+            body {
+                margin: 10px;
+                min-height: calc(100vh - 20px);
+
+                display: flex;
+                flex-direction: column;
+            }
+            .head {
+                flex: 1 1 auto;
+
+                display:flex;
+            }
+            .content {
+                flex: 14 1 auto;
+
+                display: flex;
+                flex-direction: row-reverse;
+            }
+            footer {
+                flex: 1 1 0;
+                
+                display:flex;
+                flex-direction: row-reverse;
+                align-items: center;
+
+                font-size:x-small;
+            }
+            .hyperlinks{
+                display:flex;
+                align-items:center;
+                justify-content:center;
+            }
+            a {
+                text-decoration: none;            
+            }
+            a:hover {
+                text-decoration:underline;
+            }
+            .one {
+                flex: 4 1 40%;
+                background: #283350;
+            }
+            .two {
+                flex: 1 1 10%;
+            }
+            .three {
+                flex: 5 1 50%;
+            }
+            .centerpiece {
+                position: fixed;
+                right: calc(10px + 50%) ;
+                top: 20%;
+                width: 350px;
+                height: 350px;
+
+                background-color: #f93800;
+                padding: 1px;
+            }
+            .centerpiece img{
+                position:fixed;
+                right:calc(85px + 50%);
+                top:calc(20% + 75px);
+                width:200px;
+                height:200px;
+
+                opacity:0;
+                border: 1px solid black;
+            }
+            .article{
+                padding-left: 30px;
+                padding-right:30px;
+            }
+
+            h2 {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 1536 686 -->
+        <div class="head">
+        </div>
+        <div class="content">
+            <div class="three">
+                <div class="article">
+                    <h2>What are fractals?</h2>
+                    <p>    Fractals are mathematical objects that display <em>self-similarity</em>. Self-similarity is when small sections of the
+                           object are revealed to be, through close scrutiny, complete copies of the original image! If you look really close, you'll see the same image again and again and again!<br><br>
+                           Fractals can often be observed in nature as natural processes play themselves out identically at different scales. The 
+                           branching of lightning bolts, the dance of flame, even conscious thought; fractals and recursion are everywhere you look.<br><br>
+                           You don't have to be a mathematician to appreciate the beauty! Try making your <a href="index.html">own</a>!
+
+                    </p>
+                </div>
+            </div>
+            <div class="two"></div>
+            <div class="one"></div>
+            <div class="centerpiece">
+                <img src="images/example/bloody leaf.png" alt="bloody leaf" id="leaf">
+                <img src="images/example/color.png" alt="color" id="color">
+                <img src="images/example/deep blue.png" alt="blue" id="blue">
+                <img src="images/example/fern.png" alt="fern" id="fern">
+                <img src="images/example/seaweed.png" alt="seaweed" id="seaweed">
+                <img src="images/example/Sierpiński triangle.png" alt="Sierpiński triangle" id="sierp">
+                <img src="images/example/spiral power.png" alt="Spiral power" id="spiral">
+                <img src="images/example/starstruck.png" alt="starstruck" id="starstruck">
+                <img src="images/example/wheat.png" alt="wheat" id="wheat">
+            </div>
+        </div>
+        <footer>
+            <div class="hyperlinks">
+            If you like what I do consider
+            <a style="color: #bca300" target="_blank" href="https://buymeacoffee.com/dramorak">☕️ buying me a coffee</a>
+            </div>
+        </footer>
+        <script>
+            //change images every 5 seconds
+            let images = ['#wheat','#starstruck','#spiral','#sierp','#seaweed','#fern','#blue','#color','#leaf'];
+            let i = 0;
+            function changeImage(){
+                // skeleton
+            // scale i to opacity of 0 over .5 seconds
+                function reduceOpacity(i){
+                    function helper(){
+                        if (document.querySelector(images[i]).style.opacity > 0){
+                        document.querySelector(images[i]).style.opacity -= 0.1;
+                        window.setTimeout(helper, 50);
+                        }
+                    }
+                    return helper;
+                }
+                window.setTimeout(reduceOpacity(i),50);
+                
+                // set i + 1 to opacity of 1
+                i = (i + 1)% images.length;
+                document.querySelector(images[i]).style.opacity = 1;
+            }
+            document.querySelector('#wheat').style.opacity = 1;
+
+            window.setInterval(changeImage,5000);
+        </script>
+    </body>
+</html>

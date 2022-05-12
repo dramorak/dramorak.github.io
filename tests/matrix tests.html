@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Matrix performance testing</title>
+		<style>
+			table, th, td {
+				border: 1px solid black;
+			}
+		</style>
+		<script>
+
+			function MyMatrix(seq){
+				if(seq.length !== 6){
+					throw new TypeError('Expecting 6 entries.');
+				}
+
+				this.m11 = seq[0];
+				this.m12 = seq[1];
+				this.m21 = seq[2];
+				this.m22 = seq[3];
+				this.m31 = seq[4];
+				this.m32 = seq[5];
+
+				this._matrix = seq;
+			}
+
+			MyMatrix.prototype.multiply= function(mat){
+				if((mat instanceof MyMatrix) === false){
+					throw new TypeError('Expected a MyMatrix entry');
+				}
+
+				var a = this.m11 * mat.m11 + this.m21 * mat.m12;
+				var b = this.m12 * mat.m11 + this.m22 * mat.m12;
+				var c = this.m11 * mat.m21 + this.m21 * mat.m22;
+				var d = this.m12 * mat.m21 + this.m22 * mat.m22;
+				var e = this.m11 * mat.m31 + this.m21 * mat.m32 + this.m31;
+				var f = this.m12 * mat.m31 + this.m22 * mat.m32 + this.m32;
+
+
+				return new MyMatrix([a,b,c,d,e,f]);
+			}
+
+			function MyMatrix2(seq){
+				if(seq.length !== 6){
+					throw new TypeError('Expecting 6 entries.');
+				}
+
+				this.m11 = seq[0];
+				this.m12 = seq[1];
+				this.m21 = seq[2];
+				this.m22 = seq[3];
+				this.m31 = seq[4];
+				this.m32 = seq[5];
+
+				this._matrix = seq;
+			}
+
+			MyMatrix2.prototype.multiply= function(mat){
+				if((mat instanceof MyMatrix2) === false){
+					throw new TypeError('Expected a MyMatrix entry');
+				}
+				return new MyMatrix([this.m11 * mat.m11 + this.m21 * mat.m12,this.m12 * mat.m11 + this.m22 * mat.m12,this.m11 * mat.m21 + this.m21 * mat.m22,this.m12 * mat.m21 + this.m22 * mat.m22,this.m11 * mat.m31 + this.m21 * mat.m32 + this.m31,this.m12 * mat.m31 + this.m22 * mat.m32 + this.m32]);
+			}
+
+			function matrixTest(matrix){
+				return function(n){
+				let a = new matrix([1,2,3,4,5,6]);
+				let b = new matrix([1,2,3,4,5,6]);
+
+				let start = Date.now();
+				for(var i = 0; i < n; i++){
+					a.multiply(b);
+				}
+				let duration = Date.now() - start;
+
+				return duration + 'ms';
+				}
+			}
+
+			DOMMatrixTest = matrixTest(DOMMatrix);
+
+			myMatrixTest = matrixTest(MyMatrix);
+
+			myMatrix2Test = matrixTest(MyMatrix2);
+
+			function runTest(){
+				document.querySelector("#DOMMatrix-10").innerHTML = DOMMatrixTest(10);
+				document.querySelector("#DOMMatrix-100").innerHTML = DOMMatrixTest(100);
+				document.querySelector("#DOMMatrix-1000").innerHTML = DOMMatrixTest(1000);
+				document.querySelector("#DOMMatrix-10000").innerHTML = DOMMatrixTest(10000);
+				document.querySelector("#DOMMatrix-100000").innerHTML = DOMMatrixTest(100000);
+				document.querySelector('#DOMMatrix-1000000').innerHTML = DOMMatrixTest(1000000);
+
+				document.querySelector('#MyMatrix-10').innerHTML = myMatrixTest(10);
+				document.querySelector('#MyMatrix-100').innerHTML = myMatrixTest(100);
+				document.querySelector('#MyMatrix-1000').innerHTML = myMatrixTest(1000);
+				document.querySelector('#MyMatrix-10000').innerHTML = myMatrixTest(10000);
+				document.querySelector('#MyMatrix-100000').innerHTML = myMatrixTest(100000);
+				document.querySelector('#MyMatrix-1000000').innerHTML = myMatrixTest(1000000);
+				document.querySelector('#MyMatrix-10000000').innerHTML = myMatrixTest(10000000);
+
+				document.querySelector('#MyMatrix2-10').innerHTML = myMatrix2Test(10);
+				document.querySelector('#MyMatrix2-100').innerHTML = myMatrix2Test(100);
+				document.querySelector('#MyMatrix2-1000').innerHTML = myMatrix2Test(1000);
+				document.querySelector('#MyMatrix2-10000').innerHTML = myMatrix2Test(10000);
+				document.querySelector('#MyMatrix2-100000').innerHTML = myMatrix2Test(100000);
+				document.querySelector('#MyMatrix2-1000000').innerHTML = myMatrix2Test(1000000);
+				document.querySelector('#MyMatrix2-10000000').innerHTML = myMatrix2Test(10000000);
+			}
+		</script>
+	</head>
+	<body>
+		<h1>DOMMatrix / MyMatrix performance comparison.</h1>
+		<button id="runTest">Run Test</button>
+		<table>
+			<tr>
+				<th>Count</th>
+				<th>DOMMatrix</th>
+				<th>MyMatrix</th>
+				<th>MyMatrix2</th>
+			</tr>
+
+			<tr>
+				<th>10</th>
+				<th id="DOMMatrix-10"></th>
+				<th id="MyMatrix-10"></th>
+				<th id="MyMatrix2-10"></th>
+			</tr>
+			<tr>
+				<th>100</th>
+				<th id="DOMMatrix-100"></th>
+				<th id="MyMatrix-100"></th>
+				<th id="MyMatrix2-100"></th>
+			</tr>
+			<tr>
+				<th>1000</th>
+				<th id="DOMMatrix-1000"></th>
+				<th id="MyMatrix-1000"></th>
+				<th id="MyMatrix2-1000"></th>
+			</tr>
+			<tr>
+				<th>10000</th>
+				<th id="DOMMatrix-10000"></th>
+				<th id="MyMatrix-10000"></th>
+				<th id="MyMatrix2-10000"></th>
+			</tr>
+			<tr>
+				<th>100000</th>
+				<th id="DOMMatrix-100000"></th>
+				<th id="MyMatrix-100000"></th>
+				<th id="MyMatrix2-100000"></th>
+			</tr>
+			<tr>
+				<th>1000000</th>
+				<th id="DOMMatrix-1000000"></th>
+				<th id="MyMatrix-1000000"></th>
+				<th id="MyMatrix2-1000000"></th>
+			</tr>
+			<tr>
+				<th>10000000</th>
+				<th id="DOMMatrix-10000000"></th>
+				<th id="MyMatrix-10000000"></th>
+				<th id="MyMatrix2-10000000"></th>
+			</tr>
+		</table>
+		<script>
+			document.querySelector('#runTest').addEventListener('click', runTest);
+		</script>
+	</body>
+</html>

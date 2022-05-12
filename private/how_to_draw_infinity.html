@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en-us">
+		<meta charset="utf-8" >
+		<title>Drawing infinity</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <style>
+            html, body {
+                margin: 0px;
+                background-color: rgb(30, 30, 35);
+                color: rgb(235, 235, 235);
+                font-family: "Lucida Console"
+            }
+            main {
+                display: flex;
+            }
+            .left {
+                flex: 1 1 25%;
+            }
+            .middle {
+                flex: 1 1 50%;
+
+                display:flex;
+                flex-direction: column;
+            }
+            .header {
+                flex: 1 1 auto;
+
+                margin: 10px 0 60px 0;
+            }
+            .header h1{
+                color: rgb(194, 0, 0);
+            }
+            .content {
+                flex: 15 1 auto;
+                margin: 10px 0 20px 0;
+                line-height:1.5em;
+            }
+            .content h2 {
+                margin: 40px 0 20px 0;
+                color: rgb(194, 0, 0);
+            }
+            .content p {
+                margin: 20px 0 10px 0;
+            }
+            .content #img1{
+                width: 462px;
+            }
+            .content #img2 {
+                width: 572px;
+            }
+            .content #img3 {
+                width:658px;
+            }
+            .content #img4 {
+                width:852px;
+            }
+            .content #img5 {
+                width: 500px;
+            }
+            .content .image-holder{
+                margin: 20px auto 20px auto;
+                font-size: small;
+            }
+            a {
+                color: rgb(83, 83, 255);
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            .footer {
+                flex: 1 1 auto;
+                margin:  0 0 20px 0;
+                display:flex;
+                flex-direction: row-reverse;
+                align-items: center;
+
+                font-size:x-small;
+            }
+            .hyperlinks{
+                display:flex;
+                align-items:center;
+                justify-content:center;
+            }
+            .right {
+                flex: 1 1 25%;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div class="left"></div>
+            <div class="middle">
+                <div class="header">
+                    <h1>Drawing infinite objects in finite time</h1>
+                    <div><strong><a href="index.html">main page</a></strong></div>
+                    <div><strong>Dramorak</strong> 2022-04-08</div>
+                </div>
+                <div class="content">
+                    <p>
+                        Geometry is very beautiful. I chose to make this program because fractals are interesting and accessible; you don't need a degree to see their beauty.  
+                    </p>
+                    <p>
+                        The biggest problem I faced going into this is that I'm an idiot. I knew next to nothing about web development, and very little about programming.
+                         I managed to scrape together something presentable because:
+                        <ol>
+                            <li>I had a goal I cared about, and</li>
+                            <li>I had time and access to resources.</li>
+                        </ol>
+                        Learning can be like getting slapped in the face and coming back for seconds. Sometimes you need a reason to keep coming back.
+                    </p>
+                        <div class="image-holder" id="img1">
+                            <img src="images/ten_thousand.png" display="block" alt="relevant xkcd">
+                            relevant XKCD
+                        </div>
+                    <p>
+                        Nuances of human psychology aside, the languages and skills needed to program this website are as follows:
+                        <ul>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                            <li>A little linear algebra</li>
+                        </ul>
+                        Modern web-browsers can take these languages and turn them into websites. I recommend <a href="https://developer.mozilla.org/en-US/docs/Learn">MDN Web Docs</a>, they have an excellent free course on web development. 
+                    </p>
+                    <h2>Goals</h2>
+                    <p>
+                        When designing the program, I had 3 goals:
+                        <ol>
+                            <li>Few restrictions on user input</li>
+                            <li>Simple and fun UI</li>
+                            <li>'Infinite' depth fractals</li>
+                        </ol>
+                        The idea was to make it fun and easy for kids to get into. It's difficult, though, because fractals are fundamentally exponential objects. The difference between drawing the fractal in a single frame, and never drawing it at all, is often just a fraction of an inch. 
+                    </p>    
+                    <div class="image-holder" id="img2">
+                        <img src="images/exponential.png" alt="exponential growth" display="block">
+                        these things grow <em>FAST</em>
+                    </div>
+                    <p>
+                        So, the major challenge of the program was being able to handle and manipulate these gigantic objects in a fun way without placing undue burden on either the RAM or the processor. 
+                    </p>
+                    <h2>Implementation 1</h2>
+                    <p>
+                        In my initial approach, I stored the entire fractal in memory as a tree structure, and manipulated it as if it were an object:
+                    </p>
+                    <div class="image-holder" id="img3">
+                        <img src="images/implementation1.png" alt="implementation 1" display="block">
+                        first implementation
+                    </div>
+                    <p>
+	Which works, but had 2 major flaws. One, it potentially takes up a ton of memory, way more than is reasonable for a web application. Two, it runs in \(O(d2^d)\) time, where \(d\) is the depth of the tree. Which isn't awful compared to \(O(2^d)\) (if only because \(O(2^d)\) is already god awful), but since I wanted to be able to update and refresh the tree 60 times per second, every little bit counted.
+                    </p>
+                    <h2>Implementation 2</h2>
+                    <p>
+                        After thinking about it a bit, I realized that it wasn't strictly necessary to keep the entire tree in memory. Really, all I needed to do was store all parent nodes to the current node being drawn:
+                    </p>
+                    <div class="image-holder" id="img4">
+                        <img src="images/implementation2.jpeg" alt="implementation 2" display="block">
+                        second implementation (rough  idea)
+                    </div>
+                    <p>
+	With this, the memory requirement went from \(O(2^d)\) to \(O(d)\), which was totally feasible. As a bonus, this method only required a run time of \(O(2^d)\), which while still challenging, was much better than \(O(d2^d)\).
+                    </p>
+                    <h2>Despair</h2>
+                    <p>
+                        At this point, I'd reached the limits of efficiency. Minor optimizations were possible, but ultimately futile. There simply isn't a way to 
+                        draw an exponential object in a reasonable amount of time. I tried limiting user input, and while I developed some clever techniques, they
+                        were never perfect, and anyway, it still felt like a violation of goal #1. So, I conceded defeat and tried something new.
+                        
+                    </p>
+                    <h2>Implementation 3 (final)</h2>
+                    <p>
+                        I realized two things:
+                        <ol>
+                            <li>Most of the time, there's no change in the image. I only really needed to update the canvas during user input, and then only the part of the fractal that the user is drawing.</li>
+                            <li>I don't strictly need to draw the *entire* fractal every frame. If I ran over quota for the number of operations I could complete in a single frame, I could defer the drawing to the next frame.</li>
+                        </ol>
+                    </p>
+                    <p>
+                        1 was simple enough to implement. The canvas element stores its state in memory, keeping a record of past changes. So, I could store the fractal 
+                        as an image on the old canvas, and open up a new canvas to draw on whenever the user decided to draw something.
+                    </p>
+                    <p>
+                        2 was tricky. The problem is that drawing the fractal was most easily understood as being a functional operation, a recursive call to a draw 
+                        operation. But pausing the function call stack after a certain number of operations is impossible (I think? Let me know, please :)). So, since 
+                        the default function call stack didn't suit my needs, I just, made my own. It's ugly as sin. The 'drawing' of the fractal consists
+                         of calling about 4000 draw operations, pausing execution, advancing a frame, then resuming execution. This continues until the entire fractal 
+                         is drawn (which can take a long, long time, depending on input).
+                    </p>
+                    <div class="image-holder" id="img5">
+                        <img src="images/walleandeve.jpeg" alt="juryrig" display="block">
+                        
+                    </div>
+                    <h2>Wrapping up</h2>
+                    <p>
+                        In conclusion, if you have something which is impossible to compute, don't compute it all at once.
+                    </p>
+                    <p>
+                        Of course, there's lots of little details that I spent way too much time working on, but I won't bore you. I don't think anyone 
+                        is interested in the intricacies of event handling (puke).
+                    </p>
+                    <p>
+                        To be honest, I don't feel like the program is done. There are many features that I want to include, like scaling, breadth-first drawing, 
+                        reflective transformation, non-linear transformation, etc etc. But It's still a pretty cool program, and I have to release at some point, so 
+                        here we are. 
+                    </p>
+                    <p>
+                        I hope the program gives you the same wonder that geometry gives me. I hope you have as much fun playing with it as I had making it. <br>
+                        Thanks for reading,<br>
+                        Dramorak
+                    </p>
+                </div>
+                <div class="footer">
+                    <div class="hyperlinks">
+                        If you like what I do consider
+                        <a style="color: #ffdd00" target="_blank" href="https://buymeacoffee.com/dramorak">☕️ buying me a coffee</a>
+                    </div>
+                </div>
+            </div>
+            <div class="right"></div>
+        </main>    
+    </body>
+</html>

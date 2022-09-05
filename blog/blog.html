@@ -62,6 +62,20 @@
             h2 {
                 font-size:20px;
             }
+            h3 {
+                font-size: 18px;
+            }
+            .code-container {
+                width: 100%;
+                margin-top:10px;
+                margin-bottom:10px;
+                background-color: rgb(244, 244, 244);
+            }
+            img {
+                display:block;
+                margin-left:auto;
+                margin-right:auto;
+            }
         </style>
     </head>
     <body>
@@ -69,6 +83,58 @@
             <header><h1>Blog</h1></header>
             <hr>
             <main>
+                <article>
+                    <h2><time datetime="2022-09-05">Sept 2022</time>:Searching through large solution spaces</h2>
+                    <p>I was working on a topcoder challenge, <a href="https://www.topcoder.com/challenges/3523079f-8df9-4731-9dbc-d8ded0660992?tab=details">Collatz Sequence,</a>
+                    and it presented an interesting problem. In abstract, suppose that you have some tree, T. The tree has a HUGE number of nodes (googol plus). Nodes in the tree have a "score", with descendent 
+                    nodes usually (but not always) having better scores than their ancestors. You are tasked with finding a node in this tree with as high a "score" as possible.
+                     How do you do that?</p>
+                    <p>At first glance, the problem seems impossible, and in a sense, it is. It is computationally infeasible to find the best node through brute force computation.
+                       The best you can do is guess. So let's guess as smartly as we can.
+                    </p>
+                    <h3>Beam Search Algorithm</h3>
+                    <p>The idea is that you'd like to search the entire space, but memory and time limit you from checking all possible values. So instead of checking <em>every</em>
+                        subtree, you only check those subtrees which have the highest scores for the level, and are likely to yield a high score for the whole tree. It's a simple idea,
+                        but very powerful.
+                    </p>
+                    <img src="beamsearch.svg">
+                    <p>Do a breadth-first search of the tree. At each level, you prune your solution space to only look at the best candidates. Continue until there are no more nodes to look at, return the best found.
+                        You aren't guaranteed to get the best solution anymore, but by giving up that guarantee, you get an algorithm that can actually finish, and anyways usually returns a pretty good answer. Here's the pseu   do:
+                    </p>
+                    <div class="code-container">
+                        <code>
+                        &emsp; WIDTH = beam width<br>
+                        &emsp; T = Tree #with root r<br>
+                        &emsp; L = [r] #level set<br>
+                        &emsp; bestFound = -1<br>
+                        &emsp; while L not empty:<br>
+                        &emsp;&emsp; t = []<br>
+                        &emsp;&emsp; for n in L:<br>
+                        &emsp;&emsp;&emsp; bestFound = max(bestFound, n)<br>
+                        &emsp;&emsp;&emsp; for child in n.children:<br>
+                        &emsp;&emsp;&emsp;&emsp; t.append(child)<br>
+                                        <br>
+                        &emsp;&emsp; #prune bad subtrees<br>
+                        &emsp;&emsp; while len(t) > WIDTH:<br>
+                        &emsp;&emsp;&emsp; t.remove(min(t))<br>
+                        </code>
+                    </div>
+                    <h3>Runtime analysis</h3>
+                    <p>
+                        By my reckoning, the time complexity of the above algorithm is: <math>O(d * W^2)</math>, where <math>d</math> is the depth of the tree and <math>W</math> is the max width of the level set.
+                    </p>
+                    <p>
+                        The algorithm given above isn't particularly good. There's some optimizations that can be made (try letting t be a max-heap instead). But already you can see
+                        that we're on the right track. It's totally feasible to be able to search through gigantic trees this way by adjusting the Width variable. With a little tweaking,
+                        you can even get it down to <math>O(d * W * lg(W))</math>.
+                    </p>
+                    <h3>Summary and next steps</h3>
+                    <p>The gist of the article is that it's impossible to find best answers in large solution spaces, so you must find clever greedy algorithms to find good-enough answers. 
+                        Next step would be a dfs approach to the beam-search algorithm, prioritizing those nodes which have best value, even if not on the same level. I'll leave that to the 
+                        reader though.
+                    </p>
+                    <p>Dramorak</p>
+                </article>
                 <article>
                     <h2><time datetime="2022-05-02">May 2022</time>:First Post!</h2>
                     <p>Hey! Welcome to the blog. I haven't decided what to write yet; to be honest, I don't think that I really have any thoughts worth sharing.</p>

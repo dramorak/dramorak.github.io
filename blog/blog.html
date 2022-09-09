@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang='en-us'>
     <head>
-        <title>Lessons</title>
+        <title>Blog</title>
         <meta name='description' content="articles on topics I've covered for students.">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             html, body {
                 margin: 0;
-                height: 100%;
                 width: 100%;
                 
                 background-color: rgb(254,254,254);
@@ -17,7 +16,6 @@
             }
             .center {
                 position: absolute;
-                height: 100%;
                 width:  60%;
                 left: 20%;
             }
@@ -99,32 +97,37 @@
                     </p>
                     <img src="beamsearch.svg">
                     <p>Do a breadth-first search of the tree. At each level, you prune your solution space to only look at the best candidates. Continue until there are no more nodes to look at, return the best found.
-                        You aren't guaranteed to get the best solution anymore, but by giving up that guarantee, you get an algorithm that can actually finish, and anyways usually returns a pretty good answer. Here's the pseu   do:
+                        You aren't guaranteed to get the best solution anymore, but by giving up that guarantee, you get an algorithm that can actually finish, and anyways usually returns a pretty good answer. Here's the pseudo:
                     </p>
                     <div class="code-container">
-                        <code>
-                        &emsp; WIDTH = beam width<br>
-                        &emsp; T = Tree #with root r<br>
-                        &emsp; L = [r] #level set<br>
-                        &emsp; bestFound = -1<br>
-                        &emsp; while L not empty:<br>
-                        &emsp;&emsp; t = []<br>
-                        &emsp;&emsp; for n in L:<br>
-                        &emsp;&emsp;&emsp; bestFound = max(bestFound, n)<br>
-                        &emsp;&emsp;&emsp; for child in n.children:<br>
-                        &emsp;&emsp;&emsp;&emsp; t.append(child)<br>
-                                        <br>
-                        &emsp;&emsp; #prune bad subtrees<br>
-                        &emsp;&emsp; while len(t) > WIDTH:<br>
-                        &emsp;&emsp;&emsp; t.remove(min(t))<br>
-                        </code>
+                        <pre style="display:block;width:auto;margin:10px;padding:20px;background-color:rgb(30,30,30);color:rgb(230,230,230);">
+<code>WIDTH <span style="color:rgb(200,146,40);">=</span> beam width
+T <span style="color:rgb(200,146,40);">=</span> Tree with root r
+level <span style="color:rgb(200,146,40);">=</span> <span style="color:rgb(200,146,40);">[</span>r<span style="color:rgb(200,146,40);">]</span> <span style="color:rgb(60,130,60);">#bfs level set</span>
+bestFound <span style="color:rgb(200,146,40);">=</span> <span style="color:rgb(200,146,40);">-</span>1
+
+<span style="color:rgb(60,130,60);">#bfs through tree, pruning at each step</span>
+<span style="color:rgb(50,50,240);">while</span> level <span style="color:rgb(50,50,240);">not</span> empty<span style="color:rgb(200,146,40);">:</span>
+    temp <span style="color:rgb(200,146,40);">=</span> <span style="color:rgb(200,146,40);">[</span><span style="color:rgb(200,146,40);">]</span>
+    <span style="color:rgb(50,50,240);">for</span> n <span style="color:rgb(50,50,240);">in</span> level<span style="color:rgb(200,146,40);">:</span>
+        bestFound <span style="color:rgb(200,146,40);">=</span> max<span style="color:rgb(200,146,40);">(</span>bestFound, n<span style="color:rgb(200,146,40);">)</span>
+        <span style="color:rgb(50,50,240);">for</span> child <span style="color:rgb(50,50,240);">in</span> n.children<span style="color:rgb(200,146,40);">:</span>
+            temp.append<span style="color:rgb(200,146,40);">(</span>child<span style="color:rgb(200,146,40);">)</span>
+                
+        <span style="color:rgb(60,130,60);">#prune bad subtrees</span>
+        <span style="color:rgb(50,50,240);">while</span> len<span style="color:rgb(200,146,40);">(</span>temp<span style="color:rgb(200,146,40);">)</span> <span style="color:rgb(200,146,40);">></span> WIDTH<span style="color:rgb(200,146,40);">:</span>
+            temp.remove<span style="color:rgb(200,146,40);">(</span>min<span style="color:rgb(200,146,40);">(</span>temp<span style="color:rgb(200,146,40);">)</span><span style="color:rgb(200,146,40);">)</span>
+
+    level <span style="color:rgb(200,146,40);">=</span> temp
+<span style="color:rgb(50,50,240);">return</span> bestFound
+                        </pre></code>
                     </div>
                     <h3>Runtime analysis</h3>
                     <p>
                         By my reckoning, the time complexity of the above algorithm is: <math>O(d * W^2)</math>, where <math>d</math> is the depth of the tree and <math>W</math> is the max width of the level set.
                     </p>
                     <p>
-                        The algorithm given above isn't particularly good. There's some optimizations that can be made (try letting t be a max-heap instead). But already you can see
+                        The algorithm given above isn't particularly good. There's some optimizations that can be made (try letting temp be a max-heap instead). But already you can see
                         that we're on the right track. It's totally feasible to be able to search through gigantic trees this way by adjusting the Width variable. With a little tweaking,
                         you can even get it down to <math>O(d * W * lg(W))</math>.
                     </p>
